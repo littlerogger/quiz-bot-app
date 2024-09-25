@@ -1,7 +1,6 @@
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-# Substitua 'YOUR_API_KEY' pelo token do seu bot
 bot = telebot.TeleBot('8075987584:AAGXtvS5MDEmEJcZYoQocVBFcudF5OeTF3M')
 
 # Dicionários para armazenar as perguntas e respostas
