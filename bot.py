@@ -71,6 +71,12 @@ def enviar_pergunta(message, user_id):
 @bot.callback_query_handler(func=lambda call: call.data.startswith("resposta_"))
 def verificar_resposta(call):
     user_id = call.from_user.id
+    
+    # Verifica se o usuário está no dicionário
+    if user_id not in user_scores:
+        bot.send_message(call.message.chat.id, "Erro: Você não começou o quiz ainda. Por favor, use /start para iniciar.")
+        return
+
     categoria = user_scores[user_id]["categoria"]
     pergunta_atual = user_scores[user_id]["pergunta_atual"]
     resposta_correta = quizzes[categoria][pergunta_atual]["correta"]
@@ -86,5 +92,6 @@ def verificar_resposta(call):
     else:
         pontuacao_final = user_scores[user_id]["pontuacao"]
         bot.send_message(call.message.chat.id, f"Quiz finalizado! Sua pontuação: {pontuacao_final}/{len(quizzes[categoria])}")
+
 
 bot.polling()
